@@ -3,8 +3,6 @@ package com.app.wiprotest.ui.mainmodule
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
-import android.widget.Toast
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -47,7 +45,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainNav
     /**
      * Instance of [MainNavigator]
      */
-    var mainNavigator: MainNavigator? = null
+    private var mainNavigator: MainNavigator? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -87,10 +85,10 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>(), MainNav
             DialogUtils.startProgressDialog(this@MainActivity)
 
             // Observer which observes on the data received from the API
-            mainViewModel.callApi().observe(this, Observer {
+            mainViewModel.callApi().observe(this, {
                 if (it != null) {
                     // Set Title to the toolbar
-                    activityMainBinding?.txtMainTitle?.text = it.title.toString()
+                    activityMainBinding?.txtMainTitle?.text = it.title
 
                     // Stop Progress Bar
                     DialogUtils.stopProgressDialog()

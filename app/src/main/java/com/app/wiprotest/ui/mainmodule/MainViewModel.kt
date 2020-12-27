@@ -36,8 +36,8 @@ class MainViewModel(application: Application) : BaseViewModel(application) {
                 override fun onComplete() {
                 }
 
-                override fun onNext(t: CityInformationModel) {
-                    loginModel.value = t
+                override fun onNext(cityInformationModel: CityInformationModel) {
+                    loginModel.value = cityInformationModel
                 }
 
                 override fun onError(e: Throwable) {
